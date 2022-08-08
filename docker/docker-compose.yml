@@ -1,0 +1,28 @@
+version: '3.3'
+services:
+  api:
+    image: api
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile
+    container_name: api
+    ports:
+      - "9000:9000"
+    depends_on:
+      - database
+
+  database:
+    image: mysql:latest
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'metropia'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - './.mysql-data/db:/var/lib/mysql'

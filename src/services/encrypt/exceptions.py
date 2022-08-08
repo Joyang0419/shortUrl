@@ -1,0 +1,1 @@
+"""encrypt services exceptions."""
